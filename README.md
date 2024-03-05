@@ -1,6 +1,8 @@
 # python-web-examples
 Examples for web development with Python.
 
+Reference: https://www.cosmicpython.com/book/preface.html
+
 # Architecture
 <img src="img/architecture.png" width="600">
 
