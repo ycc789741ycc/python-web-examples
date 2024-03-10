@@ -1,17 +1,16 @@
-from dataclasses import dataclass, field
-from uuid import uuid4, UUID
+from dataclasses import dataclass
 
 
 @dataclass
 class Book:
+    id: str
     name: str
     author: 'Author'
     price: float
-    id: UUID = field(default_factory=uuid4)
 
 
 @dataclass
 class Author:
+    id: str
     name: str
     age: int
-    id: UUID = field(default_factory=uuid4)

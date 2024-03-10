@@ -2,17 +2,21 @@ import pytest
 
 from app.domains.book_store.models.book import Book, Author
 from app.domains.book_store.models.book_store import BookStore
-from app.domains.book_store.repository.base import BaseBookStoreRepository
 from app.domains.book_store.repository.in_memory import InMemoryBookStoreRepository
 from app.domains.book_store.service.service import BookStoreService
 from app.domains.book_store.exceptions import BookPriceNotValid
+from app.domains.utils import id_generator
 
 
 def test_get_all(in_memory_book_store_repository: InMemoryBookStoreRepository):
     book_store_service = BookStoreService(in_memory_book_store_repository)
 
-    book_store_1 = BookStore(name="Book Store 1", location="Location 1")
-    book_store_2 = BookStore(name="Book Store 2", location="Location 2")
+    book_store_1 = BookStore(
+        id=id_generator(), name="Book Store 1", location="Location 1"
+    )
+    book_store_2 = BookStore(
+        id=id_generator(), name="Book Store 2", location="Location 2"
+    )
     book_store_service.create(book_store_1)
     book_store_service.create(book_store_2)
 
@@ -28,8 +32,12 @@ def test_get_all(in_memory_book_store_repository: InMemoryBookStoreRepository):
 def test_get_by_id(in_memory_book_store_repository: InMemoryBookStoreRepository):
     book_store_service = BookStoreService(in_memory_book_store_repository)
 
-    book_store_1 = BookStore(name="Book Store 1", location="Location 1")
-    book_store_2 = BookStore(name="Book Store 2", location="Location 2")
+    book_store_1 = BookStore(
+        id=id_generator(), name="Book Store 1", location="Location 1"
+    )
+    book_store_2 = BookStore(
+        id=id_generator(), name="Book Store 2", location="Location 2"
+    )
     book_store_service.create(book_store_1)
     book_store_service.create(book_store_2)
 
@@ -45,13 +53,15 @@ def test_add_selling_books(
 ):
     book_store_service = BookStoreService(in_memory_book_store_repository)
 
-    book_store = BookStore(name="Book Store 1", location="Location 1")
+    book_store = BookStore(
+        id=id_generator(), name="Book Store 1", location="Location 1"
+    )
     book_store_service.create(book_store)
 
-    author_1 = Author(name="Author 1", age=30)
-    book_1 = Book(name="Book 1", author=author_1, price=10)
-    author_2 = Author(name="Author 2", age=40)
-    book_2 = Book(name="Book 2", author=author_2, price=20)
+    author_1 = Author(id=id_generator(), name="Author 1", age=30)
+    book_1 = Book(id=id_generator(), name="Book 1", author=author_1, price=10)
+    author_2 = Author(id=id_generator(), name="Author 2", age=40)
+    book_2 = Book(id=id_generator(), name="Book 2", author=author_2, price=20)
 
     # Call the add_selling_books method
     book_store_service.add_selling_books(book_store.id, [book_1, book_2])
@@ -67,11 +77,13 @@ def test_add_selling_books_with_invalid_price(
 ):
     book_store_service = BookStoreService(in_memory_book_store_repository)
 
-    book_store = BookStore(name="Book Store 1", location="Location 1")
+    book_store = BookStore(
+        id=id_generator(), name="Book Store 1", location="Location 1"
+    )
     book_store_service.create(book_store)
 
-    author_1 = Author(name="Author 1", age=30)
-    book_1 = Book(name="Book 1", author=author_1, price=1000)
+    author_1 = Author(id=id_generator(), name="Author 1", age=30)
+    book_1 = Book(id=id_generator(), name="Book 1", author=author_1, price=1000)
 
     # Call the add_selling_books method
     with pytest.raises(BookPriceNotValid):
@@ -81,13 +93,15 @@ def test_add_selling_books_with_invalid_price(
 def test_add_free_books(in_memory_book_store_repository: InMemoryBookStoreRepository):
     book_store_service = BookStoreService(in_memory_book_store_repository)
 
-    book_store = BookStore(name="Book Store 1", location="Location 1")
+    book_store = BookStore(
+        id=id_generator(), name="Book Store 1", location="Location 1"
+    )
     book_store_service.create(book_store)
 
-    author_1 = Author(name="Author 1", age=30)
-    book_1 = Book(name="Book 1", author=author_1, price=0)
-    author_2 = Author(name="Author 2", age=40)
-    book_2 = Book(name="Book 2", author=author_2, price=0)
+    author_1 = Author(id=id_generator(), name="Author 1", age=30)
+    book_1 = Book(id=id_generator(), name="Book 1", author=author_1, price=0)
+    author_2 = Author(id=id_generator(), name="Author 2", age=40)
+    book_2 = Book(id=id_generator(), name="Book 2", author=author_2, price=0)
 
     # Call the add_free_books method
     book_store_service.add_free_books(book_store.id, [book_1, book_2])
@@ -103,11 +117,13 @@ def test_add_free_books_with_invalid_price(
 ):
     book_store_service = BookStoreService(in_memory_book_store_repository)
 
-    book_store = BookStore(name="Book Store 1", location="Location 1")
+    book_store = BookStore(
+        id=id_generator(), name="Book Store 1", location="Location 1"
+    )
     book_store_service.create(book_store)
 
-    author_1 = Author(name="Author 1", age=30)
-    book_1 = Book(name="Book 1", author=author_1, price=10)
+    author_1 = Author(id=id_generator(), name="Author 1", age=30)
+    book_1 = Book(id=id_generator(), name="Book 1", author=author_1, price=10)
 
     # Call the add_free_books method
     with pytest.raises(BookPriceNotValid):

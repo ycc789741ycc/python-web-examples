@@ -1,4 +1,5 @@
 from typing import List
+
 from app.domains.book_store.repository.base import BaseBookStoreRepository
 from app.domains.book_store.models.book_store import BookStore
 
