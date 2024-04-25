@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "flask-example"
+version = "0.1.0"
+description = ""
+authors = ["Yoshi Gao <yoshi4868686@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+mongoengine = "^0.28.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

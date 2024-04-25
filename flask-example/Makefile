@@ -1,0 +1,2 @@
+install-env:
+	poetry install
